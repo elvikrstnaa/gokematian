@@ -22,7 +22,6 @@
         color: #2c3e50;
       }
 
-      /* Navbar Seragam Beranda */
       .header-nav {
         background-color: #1e5631;
         padding: 16px 40px;
@@ -53,11 +52,6 @@
         transition: background 0.2s;
       }
 
-      .header-badge:hover {
-        background: rgba(255, 255, 255, 0.25);
-      }
-
-      /* Hero Banner Mini */
       .hero-mini {
         text-align: center;
         padding: 40px 20px 20px;
@@ -78,7 +72,6 @@
         line-height: 1.5;
       }
 
-      /* Form Card Container */
       .form-card {
         background: #ffffff;
         max-width: 560px;
@@ -111,15 +104,6 @@
         font-size: 0.95rem;
         box-sizing: border-box;
         outline: none;
-        transition:
-          border-color 0.2s,
-          box-shadow 0.2s;
-      }
-
-      .form-group input:focus,
-      .form-group textarea:focus {
-        border-color: #1e5631;
-        box-shadow: 0 0 0 3px rgba(30, 86, 49, 0.12);
       }
 
       .btn-submit {
@@ -132,18 +116,11 @@
         font-size: 1rem;
         font-weight: 700;
         cursor: pointer;
-        transition:
-          background 0.2s,
-          transform 0.1s;
         margin-top: 10px;
       }
 
       .btn-submit:hover {
         background-color: #174426;
-      }
-
-      .btn-submit:active {
-        transform: scale(0.99);
       }
 
       footer {
@@ -157,7 +134,7 @@
     </style>
   </head>
   <body>
-    <!-- Header Navbar Tema GoKematian -->
+    <!-- Header Navbar -->
     <header class="header-nav">
       <a href="/" class="header-logo">
         <span>🕊️ GoKematian - Administrasi</span>
@@ -176,7 +153,7 @@
 
     <!-- Form Card -->
     <div class="form-card">
-      <form id="formAdministrasi" action="/administrasi/order" method="POST">
+      <form action="/administrasi/order" method="POST">
         <div class="form-group">
           <label for="namaAlmarhum">Nama Almarhum / Almarhumah:</label>
           <input
@@ -222,7 +199,7 @@
           ></textarea>
         </div>
 
-        <button type="submit" id="btnSubmit" class="btn-submit">
+        <button type="submit" class="btn-submit">
           Ajukan Pengurusan Dokumen
         </button>
       </form>
@@ -235,50 +212,5 @@
         Publik Duka Cita Terpadu.
       </p>
     </footer>
-
-    <!-- Skrip AJAX & Render Halaman Konfirmasi -->
-    <script>
-      document
-        .getElementById("formAdministrasi")
-        .addEventListener("submit", async (e) => {
-          e.preventDefault();
-          const btn = document.getElementById("btnSubmit");
-          btn.disabled = true;
-          btn.innerText = "Mengirim Pengajuan...";
-
-          const payload = {
-            namaAlmarhum: document.getElementById("namaAlmarhum").value,
-            nik: document.getElementById("nik").value,
-            telepon: document.getElementById("telepon").value,
-            catatan: document.getElementById("catatan").value,
-          };
-
-          try {
-            const response = await fetch("/administrasi/order", {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify(payload),
-            });
-
-            // Ambil tampilan HTML kartu pengajuan berhasil dari controller
-            const htmlResult = await response.text();
-
-            if (response.ok) {
-              // Tampilkan langsung halaman konfirmasi estetik tanpa alert browser
-              document.open();
-              document.write(htmlResult);
-              document.close();
-            } else {
-              alert("Gagal Mengirim Pengajuan. Silakan coba lagi.");
-              btn.disabled = false;
-              btn.innerText = "Ajukan Pengurusan Dokumen";
-            }
-          } catch (err) {
-            alert("Terjadi kesalahan jaringan: " + err.message);
-            btn.disabled = false;
-            btn.innerText = "Ajukan Pengurusan Dokumen";
-          }
-        });
-    </script>
   </body>
 </html>
