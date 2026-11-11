@@ -227,7 +227,8 @@
           };
 
           try {
-            const response = await fetch("/api/ambulance/order", {
+            // URL disesuaikan dengan rute Express /ambulance/order
+            const response = await fetch("/ambulance/order", {
               method: "POST",
               headers: { "Content-Type": "application/json" },
               body: JSON.stringify(payload),
@@ -242,7 +243,9 @@
               // Kosongkan form setelah berhasil
               document.getElementById("formAmbulance").reset();
             } else {
-              alert("Gagal Pemesanan: " + result.message);
+              alert(
+                "Gagal Pemesanan: " + (result.message || "Terjadi kesalahan."),
+              );
             }
           } catch (err) {
             alert("Terjadi kesalahan jaringan: " + err.message);

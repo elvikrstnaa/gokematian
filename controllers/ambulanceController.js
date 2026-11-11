@@ -10,26 +10,57 @@ exports.createOrder = async (req, res) => {
       noHP,
       jemput,
       alamatJemput,
+      pickup,
       tujuan,
       alamatTujuan,
+      destination,
     } = req.body;
 
+    // Menampung variasi variabel dari Form / JSON Body
     const pemesan = namaPemesan || nama || "Pemesan";
     const nomorHP = telepon || noHP || "-";
-    const lokasiJemput = jemput || alamatJemput || "-";
-    const lokasiTujuan = tujuan || alamatTujuan || "-";
+    const lokasiJemput = jemput || alamatJemput || pickup || "-";
+    const lokasiTujuan = tujuan || alamatTujuan || destination || "-";
     const statusPesanan = "TERKONFIRMASI";
 
-    // Simpan data transaksi ke database orders
-    await db
-      .query(
-        `INSERT INTO orders (jenis_layanan, total_pembayaran, status_pembayaran) 
-       VALUES ('AMBULANCE', 250000, $1)`,
-        [statusPesanan],
-      )
-      .catch(() => {});
+    // 1. Simpan data ke tabel pemesanan_ambulans di Supabase
+    const queryText = `
+      INSERT INTO pemesanan_ambulans (nama_pemesan, no_hp, lokasi_penjemputan, lokasi_tujuan, status)
+      VALUES ($1, $2, $3, $4, 'Mencari Driver')
+      RETURNING *
+    `;
+    const queryParams = [pemesan, nomorHP, lokasiJemput, lokasiTujuan];
 
-    // HTML Tampilan Konfirmasi Sukses Estetik & Modern
+    let result;
+    try {
+      result = await db.query(queryText, queryParams);
+    } catch (dbErr) {
+      console.warn(
+        "Gagal simpan ke pemesanan_ambulans, mencobakan fallback orders...",
+        dbErr.message,
+      );
+      // Fallback opsional ke tabel orders jika ada
+      await db
+        .query(
+          `INSERT INTO orders (jenis_layanan, total_pembayaran, status_pembayaran) 
+         VALUES ('AMBULANCE', 250000, $1)`,
+          [statusPesanan],
+        )
+        .catch(() => {});
+    }
+
+    // 2. Jika request datang dari AJAX/fetch (headers Accept application/json)
+    if (req.headers["content-type"] === "application/json" || req.xhr) {
+      return res.status(200).json({
+        success: true,
+        message: "Pemesanan ambulans berhasil dikirim!",
+        data: result
+          ? result.rows[0]
+          : { nama_pemesan: pemesan, status: statusPesanan },
+      });
+    }
+
+    // 3. Jika submit form HTML biasa (Server-Side Rendered HTML Response)
     res.send(`
       <!DOCTYPE html>
       <html lang="id">
@@ -250,6 +281,9 @@ exports.createOrder = async (req, res) => {
     `);
   } catch (error) {
     console.error("Error Ambulance Order:", error);
+    if (req.headers["content-type"] === "application/json" || req.xhr) {
+      return res.status(500).json({ success: false, message: error.message });
+    }
     res.status(500).send("Gagal memproses pemesanan ambulans.");
   }
 };
