@@ -1,0 +1,627 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Makam - Pemetaan Denah Petak TPU Pekanbaru</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <style>
+      .plot-info {
+        background-color: #f0f7f1;
+        border: 1px dashed #a3c2a8;
+        border-radius: 8px;
+        padding: 8px 12px;
+        margin: 10px 0 12px;
+        font-size: 0.83rem;
+        color: #1e5631;
+        text-align: left;
+      }
+      .plot-info strong {
+        display: block;
+        color: #0f2b18;
+        margin-bottom: 3px;
+      }
+      .btn-map {
+        background: #e8f5e9;
+        color: #1e5631;
+        border: 1px solid #1e5631;
+        padding: 8px 0;
+        width: 100%;
+        border-radius: 8px;
+        font-weight: 700;
+        font-size: 0.85rem;
+        cursor: pointer;
+        margin-bottom: 8px;
+        transition: all 0.2s ease;
+      }
+      .btn-map:hover {
+        background: #1e5631;
+        color: #ffffff;
+      }
+
+      /* Modal Styling */
+      .modal-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.6);
+        z-index: 99999;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+      }
+      .modal-card {
+        background: #ffffff;
+        border-radius: 16px;
+        max-width: 600px;
+        width: 100%;
+        padding: 25px;
+        position: relative;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        max-height: 90vh;
+        overflow-y: auto;
+      }
+      .modal-close {
+        position: absolute;
+        top: 15px;
+        right: 20px;
+        font-size: 1.5rem;
+        cursor: pointer;
+        color: #666;
+        font-weight: bold;
+      }
+      .map-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 10px;
+        margin: 20px 0;
+        background: #f7f9f6;
+        padding: 15px;
+        border-radius: 12px;
+        border: 1px solid #e2ebe2;
+      }
+      .plot-box {
+        padding: 15px 5px;
+        border-radius: 8px;
+        text-align: center;
+        font-size: 0.82rem;
+        font-weight: 700;
+        cursor: pointer;
+        border: 2px solid transparent;
+        transition: transform 0.2s;
+      }
+      .plot-box.available {
+        background-color: #c8e6c9;
+        color: #1b5e20;
+        border-color: #81c784;
+      }
+      .plot-box.available:hover {
+        transform: scale(1.05);
+        background-color: #a5d6a7;
+      }
+      .plot-box.occupied {
+        background-color: #ffebee;
+        color: #c62828;
+        border-color: #ef9a9a;
+        cursor: not-allowed;
+        opacity: 0.7;
+      }
+      .map-legend {
+        display: flex;
+        gap: 15px;
+        justify-content: center;
+        font-size: 0.82rem;
+        margin-bottom: 15px;
+      }
+      .legend-item {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .legend-color {
+        width: 14px;
+        height: 14px;
+        border-radius: 4px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header Navbar -->
+    <nav class="navbar">
+      <h2>🪦 GoKematian - Makam</h2>
+      <a
+        href="/"
+        style="
+          color: white;
+          text-decoration: none;
+          font-weight: 600;
+          font-size: 0.95rem;
+          background: rgba(255, 255, 255, 0.15);
+          padding: 6px 14px;
+          border-radius: 8px;
+        "
+        >&larr; Kembali ke Beranda</a
+      >
+    </nav>
+
+    <!-- Hero Header -->
+    <header class="hero" style="padding: 35px 20px">
+      <h1>Daftar Lokasi Pemakaman & Krematorium Pekanbaru</h1>
+      <p>
+        Silakan pilih lokasi TPU / Krematorium dan klik peta koordinat petak
+        tanah kosong untuk melakukan pemesanan secara langsung.
+      </p>
+    </header>
+
+    <div class="container">
+      <h2 class="section-title">Pilih Lokasi TPU & Peta Petak Lahan</h2>
+
+      <!-- Grid Kartu Lokasi TPU -->
+      <div class="card-grid">
+        <!-- 1. TPU Payung Sekaki -->
+        <div class="card">
+          <span class="badge">Blok A & B</span>
+          <div class="card-icon">🏛️</div>
+          <h3>TPU Payung Sekaki</h3>
+          <p>📍 Jl. Beringin, Kel. Air Hitam, Kec. Binawidya</p>
+          <p style="font-weight: 600; color: #1e7d32; margin-bottom: 8px">
+            Status: Tersedia
+          </p>
+          <div class="plot-info">
+            <strong>📍 Titik Petak Kosong:</strong>
+            • Blok A: A-12, A-15, A-18<br />
+            • Blok B: B-04, B-09
+          </div>
+          <button
+            class="btn-map"
+            onclick="
+              openMap(
+                'TPU Payung Sekaki',
+                ['A-12', 'A-15', 'A-18', 'B-04', 'B-09'],
+                ['A-01', 'A-02', 'B-01'],
+                1,
+              )
+            "
+          >
+            🗺️ Lihat Peta Denah & Pilih Petak
+          </button>
+          <a href="/form-makam.html?tpu=1" class="btn-primary"
+            >Pesan Langsung</a
+          >
+        </div>
+
+        <!-- 2. TPU Tampan -->
+        <div class="card">
+          <span class="badge">Blok C</span>
+          <div class="card-icon">🏛️</div>
+          <h3>TPU Tampan</h3>
+          <p>📍 Jl. Uka, Kel. Simpang Baru, Kec. Binawidya</p>
+          <p style="font-weight: 600; color: #1e7d32; margin-bottom: 8px">
+            Status: Tersedia
+          </p>
+          <div class="plot-info">
+            <strong>📍 Titik Petak Kosong:</strong>
+            • Blok C: C-01, C-05, C-08, C-14
+          </div>
+          <button
+            class="btn-map"
+            onclick="
+              openMap(
+                'TPU Tampan',
+                ['C-01', 'C-05', 'C-08', 'C-14'],
+                ['C-02', 'C-03', 'C-04'],
+                2,
+              )
+            "
+          >
+            🗺️ Lihat Peta Denah & Pilih Petak
+          </button>
+          <a href="/form-makam.html?tpu=2" class="btn-primary"
+            >Pesan Langsung</a
+          >
+        </div>
+
+        <!-- 3. TPU Umban Sari -->
+        <div class="card">
+          <span class="badge">Blok A</span>
+          <div class="card-icon">🏛️</div>
+          <h3>TPU Umban Sari</h3>
+          <p>📍 Kel. Umban Sari, Kec. Rumbai</p>
+          <p style="font-weight: 600; color: #1e7d32; margin-bottom: 8px">
+            Status: Tersedia
+          </p>
+          <div class="plot-info">
+            <strong>📍 Titik Petak Kosong:</strong>
+            • Blok A: A-03, A-07, A-11, A-22
+          </div>
+          <button
+            class="btn-map"
+            onclick="
+              openMap(
+                'TPU Umban Sari',
+                ['A-03', 'A-07', 'A-11', 'A-22'],
+                ['A-01', 'A-02'],
+                3,
+              )
+            "
+          >
+            🗺️ Lihat Peta Denah & Pilih Petak
+          </button>
+          <a href="/form-makam.html?tpu=3" class="btn-primary"
+            >Pesan Langsung</a
+          >
+        </div>
+
+        <!-- 4. TPU Palas -->
+        <div class="card">
+          <span class="badge">Blok B</span>
+          <div class="card-icon">🏛️</div>
+          <h3>TPU Palas</h3>
+          <p>📍 Kel. Palas, Kec. Rumbai Barat</p>
+          <p style="font-weight: 600; color: #1e7d32; margin-bottom: 8px">
+            Status: Tersedia
+          </p>
+          <div class="plot-info">
+            <strong>📍 Titik Petak Kosong:</strong>
+            • Blok B: B-02, B-06, B-10, B-12
+          </div>
+          <button
+            class="btn-map"
+            onclick="
+              openMap(
+                'TPU Palas',
+                ['B-02', 'B-06', 'B-10', 'B-12'],
+                ['B-01', 'B-03'],
+                4,
+              )
+            "
+          >
+            🗺️ Lihat Peta Denah & Pilih Petak
+          </button>
+          <a href="/form-makam.html?tpu=4" class="btn-primary"
+            >Pesan Langsung</a
+          >
+        </div>
+
+        <!-- 5. TPU Lokomotif -->
+        <div class="card">
+          <span class="badge">Blok A & C</span>
+          <div class="card-icon">🏛️</div>
+          <h3>TPU Lokomotif</h3>
+          <p>📍 Jl. Lokomotif, Kel. Tanjung Rhu, Kec. Limapuluh</p>
+          <p style="font-weight: 600; color: #1e7d32; margin-bottom: 8px">
+            Status: Tersedia
+          </p>
+          <div class="plot-info">
+            <strong>📍 Titik Petak Kosong:</strong>
+            • Blok A: A-05, A-09 | Blok C: C-02, C-04
+          </div>
+          <button
+            class="btn-map"
+            onclick="
+              openMap(
+                'TPU Lokomotif',
+                ['A-05', 'A-09', 'C-02', 'C-04'],
+                ['A-01', 'C-01'],
+                5,
+              )
+            "
+          >
+            🗺️ Lihat Peta Denah & Pilih Petak
+          </button>
+          <a href="/form-makam.html?tpu=5" class="btn-primary"
+            >Pesan Langsung</a
+          >
+        </div>
+
+        <!-- 6. TPU Kuini -->
+        <div class="card">
+          <span class="badge">Blok B & D</span>
+          <div class="card-icon">🏛️</div>
+          <h3>TPU Kuini</h3>
+          <p>📍 Jl. Kuini, Kec. Marpoyan Damai</p>
+          <p style="font-weight: 600; color: #1e7d32; margin-bottom: 8px">
+            Status: Tersedia
+          </p>
+          <div class="plot-info">
+            <strong>📍 Titik Petak Kosong:</strong>
+            • Blok B: B-01, B-07 | Blok D: D-03, D-08
+          </div>
+          <button
+            class="btn-map"
+            onclick="
+              openMap(
+                'TPU Kuini',
+                ['B-01', 'B-07', 'D-03', 'D-08'],
+                ['B-02', 'D-01'],
+                6,
+              )
+            "
+          >
+            🗺️ Lihat Peta Denah & Pilih Petak
+          </button>
+          <a href="/form-makam.html?tpu=6" class="btn-primary"
+            >Pesan Langsung</a
+          >
+        </div>
+
+        <!-- 7. TPU Sekuntum Flamboyan -->
+        <div class="card">
+          <span class="badge">Blok A & B</span>
+          <div class="card-icon">🏛️</div>
+          <h3>TPU Sekuntum Flamboyan</h3>
+          <p>📍 Jl. Flamboyan 4, Kel. Delima, Kec. Binawidya</p>
+          <p style="font-weight: 600; color: #1e7d32; margin-bottom: 8px">
+            Status: Tersedia
+          </p>
+          <div class="plot-info">
+            <strong>📍 Titik Petak Kosong:</strong>
+            • Blok A: A-02, A-06<br />
+            • Blok B: B-03, B-11
+          </div>
+          <button
+            class="btn-map"
+            onclick="
+              openMap(
+                'TPU Sekuntum Flamboyan',
+                ['A-02', 'A-06', 'B-03', 'B-11'],
+                ['A-01', 'B-01'],
+                7,
+              )
+            "
+          >
+            🗺️ Lihat Peta Denah & Pilih Petak
+          </button>
+          <a href="/form-makam.html?tpu=7" class="btn-primary"
+            >Pesan Langsung</a
+          >
+        </div>
+
+        <!-- 8. TPU Lembah Sari -->
+        <div class="card">
+          <span class="badge">Blok C & D</span>
+          <div class="card-icon">🏛️</div>
+          <h3>TPU Lembah Sari</h3>
+          <p>📍 Jl. Sembilang No. 4, Kel. Lembah Sari, Kec. Rumbai Timur</p>
+          <p style="font-weight: 600; color: #1e7d32; margin-bottom: 8px">
+            Status: Tersedia
+          </p>
+          <div class="plot-info">
+            <strong>📍 Titik Petak Kosong:</strong>
+            • Blok C: C-03, C-09<br />
+            • Blok D: D-02, D-05
+          </div>
+          <button
+            class="btn-map"
+            onclick="
+              openMap(
+                'TPU Lembah Sari',
+                ['C-03', 'C-09', 'D-02', 'D-05'],
+                ['C-01', 'D-01'],
+                8,
+              )
+            "
+          >
+            🗺️ Lihat Peta Denah & Pilih Petak
+          </button>
+          <a href="/form-makam.html?tpu=8" class="btn-primary"
+            >Pesan Langsung</a
+          >
+        </div>
+
+        <!-- 9. TPU Alam Indah -->
+        <div class="card">
+          <span class="badge">Blok A</span>
+          <div class="card-icon">🏛️</div>
+          <h3>TPU Alam Indah</h3>
+          <p>📍 Jl. Alam Indah, Harapan Raya, Kec. Tenayan Raya</p>
+          <p style="font-weight: 600; color: #1e7d32; margin-bottom: 8px">
+            Status: Tersedia
+          </p>
+          <div class="plot-info">
+            <strong>📍 Titik Petak Kosong:</strong>
+            • Blok A: A-01, A-04, A-08, A-10
+          </div>
+          <button
+            class="btn-map"
+            onclick="
+              openMap(
+                'TPU Alam Indah',
+                ['A-01', 'A-04', 'A-08', 'A-10'],
+                ['A-02', 'A-03'],
+                9,
+              )
+            "
+          >
+            🗺️ Lihat Peta Denah & Pilih Petak
+          </button>
+          <a href="/form-makam.html?tpu=9" class="btn-primary"
+            >Pesan Langsung</a
+          >
+        </div>
+
+        <!-- 10. TPU Kartama -->
+        <div class="card">
+          <span class="badge">Blok B & C</span>
+          <div class="card-icon">🏛️</div>
+          <h3>TPU Kartama</h3>
+          <p>📍 Jl. Kartama, Kel. Maharatu, Kec. Marpoyan Damai</p>
+          <p style="font-weight: 600; color: #1e7d32; margin-bottom: 8px">
+            Status: Tersedia
+          </p>
+          <div class="plot-info">
+            <strong>📍 Titik Petak Kosong:</strong>
+            • Blok B: B-05, B-08<br />
+            • Blok C: C-06, C-12
+          </div>
+          <button
+            class="btn-map"
+            onclick="
+              openMap(
+                'TPU Kartama',
+                ['B-05', 'B-08', 'C-06', 'C-12'],
+                ['B-01', 'C-01'],
+                10,
+              )
+            "
+          >
+            🗺️ Lihat Peta Denah & Pilih Petak
+          </button>
+          <a href="/form-makam.html?tpu=10" class="btn-primary"
+            >Pesan Langsung</a
+          >
+        </div>
+
+        <!-- 11. YSPBA Umban Sari -->
+        <div class="card">
+          <span class="badge">Krematorium & TPU</span>
+          <div class="card-icon">🛕</div>
+          <h3>YSPBA Umban Sari</h3>
+          <p>📍 Kelurahan Umban Sari, Kecamatan Rumbai</p>
+          <p style="font-weight: 600; color: #1e7d32; margin-bottom: 8px">
+            Status: Tersedia
+          </p>
+          <div class="plot-info">
+            <strong>📍 Titik Petak Kosong:</strong>
+            • Blok Teratai: T-01, T-04<br />
+            • Blok Kremasi: K-02, K-05
+          </div>
+          <button
+            class="btn-map"
+            onclick="
+              openMap(
+                'YSPBA Umban Sari',
+                ['T-01', 'T-04', 'K-02', 'K-05'],
+                ['T-02', 'K-01'],
+                11,
+              )
+            "
+          >
+            🗺️ Lihat Peta Denah & Pilih Petak
+          </button>
+          <a href="/form-makam.html?tpu=11" class="btn-primary"
+            >Pesan Langsung</a
+          >
+        </div>
+
+        <!-- 12. HBT Air Hitam -->
+        <div class="card">
+          <span class="badge">Krematorium & TPU</span>
+          <div class="card-icon">🛕</div>
+          <h3>HBT Air Hitam</h3>
+          <p>📍 Jl. Guru Sulaiman, Air Hitam, Kec. Payung Sekaki</p>
+          <p style="font-weight: 600; color: #1e7d32; margin-bottom: 8px">
+            Status: Tersedia
+          </p>
+          <div class="plot-info">
+            <strong>📍 Titik Petak Kosong:</strong>
+            • Blok HBT A: H-03, H-08<br />
+            • Ruang Kremasi: R-01, R-04
+          </div>
+          <button
+            class="btn-map"
+            onclick="
+              openMap(
+                'HBT Air Hitam',
+                ['H-03', 'H-08', 'R-01', 'R-04'],
+                ['H-01', 'H-02'],
+                12,
+              )
+            "
+          >
+            🗺️ Lihat Peta Denah & Pilih Petak
+          </button>
+          <a href="/form-makam.html?tpu=12" class="btn-primary"
+            >Pesan Langsung</a
+          >
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal Peta Denah Interactive -->
+    <div class="modal-overlay" id="mapModal">
+      <div class="modal-card">
+        <span class="modal-close" onclick="closeMap()">&times;</span>
+        <h2
+          id="modalTitle"
+          style="color: #1e5631; margin-bottom: 5px; font-size: 1.4rem"
+        >
+          Peta Denah Petak Lahan
+        </h2>
+        <p style="color: #666; font-size: 0.88rem">
+          Pilih titik petak hijau (tersedia) untuk melanjutkan pemesanan.
+        </p>
+
+        <div class="map-legend">
+          <div class="legend-item">
+            <div
+              class="legend-color"
+              style="background: #c8e6c9; border: 1px solid #81c784"
+            ></div>
+            <span>Tersedia (Bisa Dipilih)</span>
+          </div>
+          <div class="legend-item">
+            <div
+              class="legend-color"
+              style="background: #ffebee; border: 1px solid #ef9a9a"
+            ></div>
+            <span>Sudah Terisi</span>
+          </div>
+        </div>
+
+        <div class="map-grid" id="mapGridContainer">
+          <!-- Petak-petak akan di-render secara dinamis lewat JS -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <p>
+        &copy; 2026 <strong>GoKematian Project</strong>. Layanan Duka Cita
+        Terpadu.
+      </p>
+    </footer>
+
+    <!-- Script Modal Peta Interaktif -->
+    <script>
+      let currentTpuId = 1;
+
+      function openMap(tpuName, availablePlots, occupiedPlots, tpuId) {
+        currentTpuId = tpuId;
+        document.getElementById("modalTitle").innerText =
+          "🗺️ Denah Koordinat - " + tpuName;
+        const grid = document.getElementById("mapGridContainer");
+        grid.innerHTML = "";
+
+        // Tampilkan petak tersedia
+        availablePlots.forEach((plot) => {
+          const box = document.createElement("div");
+          box.className = "plot-box available";
+          box.innerHTML = `<strong>${plot}</strong><br><small>Tersedia</small>`;
+          box.onclick = function () {
+            window.location.href = `/form-makam.html?tpu=${currentTpuId}&petak=${encodeURIComponent(plot)}`;
+          };
+          grid.appendChild(box);
+        });
+
+        // Tampilkan petak terisi
+        occupiedPlots.forEach((plot) => {
+          const box = document.createElement("div");
+          box.className = "plot-box occupied";
+          box.innerHTML = `<strong>${plot}</strong><br><small>Terisi</small>`;
+          grid.appendChild(box);
+        });
+
+        document.getElementById("mapModal").style.display = "flex";
+      }
+
+      function closeMap() {
+        document.getElementById("mapModal").style.display = "none";
+      }
+    </script>
+  </body>
+</html>

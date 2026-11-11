@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Konsultasi - Lembar Bantuan & Konsultasi Duka Cita</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family:
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          Roboto,
+          Helvetica,
+          Arial,
+          sans-serif;
+      }
+
+      body {
+        background-color: #f4f7f4;
+        color: #2c3e50;
+      }
+
+      .header-nav {
+        background-color: #1e5631;
+        padding: 16px 40px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .header-logo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: #ffffff;
+        font-size: 1.35rem;
+        font-weight: 700;
+        text-decoration: none;
+      }
+
+      .header-badge {
+        background: rgba(255, 255, 255, 0.15);
+        color: #ffffff;
+        padding: 6px 16px;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        text-decoration: none;
+        font-weight: 500;
+        transition: background 0.2s;
+      }
+
+      .header-badge:hover {
+        background: rgba(255, 255, 255, 0.25);
+      }
+
+      .container {
+        max-width: 680px;
+        margin: 40px auto 60px;
+        padding: 0 20px;
+      }
+
+      .form-card {
+        background: #ffffff;
+        border-radius: 18px;
+        padding: 35px 30px;
+        box-shadow: 0 10px 25px rgba(30, 86, 49, 0.06);
+        border: 1px solid #e2ebe2;
+      }
+
+      .form-title {
+        color: #1e5631;
+        font-size: 1.6rem;
+        font-weight: 800;
+        margin-bottom: 8px;
+        text-align: center;
+      }
+
+      .form-subtitle {
+        color: #666666;
+        font-size: 0.92rem;
+        text-align: center;
+        margin-bottom: 30px;
+        line-height: 1.5;
+      }
+
+      .form-group {
+        margin-bottom: 20px;
+      }
+
+      .form-group label {
+        display: block;
+        font-weight: 700;
+        font-size: 0.9rem;
+        color: #1e5631;
+        margin-bottom: 8px;
+      }
+
+      .form-control {
+        width: 100%;
+        padding: 12px 15px;
+        border: 1.5px solid #c8d6c8;
+        border-radius: 10px;
+        font-size: 0.95rem;
+        color: #2c3e50;
+        background-color: #fafdfa;
+        transition: border-color 0.2s;
+      }
+
+      .form-control:focus {
+        outline: none;
+        border-color: #1e5631;
+        background-color: #ffffff;
+      }
+
+      textarea.form-control {
+        resize: vertical;
+        min-height: 110px;
+      }
+
+      .btn-submit {
+        width: 100%;
+        background-color: #1e5631;
+        color: #ffffff;
+        border: none;
+        padding: 14px 0;
+        border-radius: 10px;
+        font-size: 1rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: background-color 0.2s;
+        margin-top: 10px;
+      }
+
+      .btn-submit:hover {
+        background-color: #174426;
+      }
+
+      footer {
+        text-align: center;
+        padding: 20px;
+        color: #666666;
+        font-size: 0.85rem;
+        border-top: 1px solid #e2ebe2;
+        background: #ffffff;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <header class="header-nav">
+      <a href="/" class="header-logo">
+        <span>🕊️ GoKematian - Konsultasi</span>
+      </a>
+      <a href="/" class="header-badge">&larr; Kembali ke Beranda</a>
+    </header>
+
+    <!-- Form Container -->
+    <div class="container">
+      <div class="form-card">
+        <h1 class="form-title">Lembar Bantuan & Konsultasi</h1>
+        <p class="form-subtitle">
+          Sampaikan pertanyaan atau kebutuhan informasi Anda seputar alur
+          pemulasaran, kremasi, lahan TPU, dan administrasi duka cita.
+        </p>
+
+        <form action="/konsultasi/kirim" method="POST">
+          <div class="form-group">
+            <label for="nama">Nama Pemohon / Penanggung Jawab</label>
+            <input
+              type="text"
+              id="nama"
+              name="nama"
+              class="form-control"
+              placeholder="Masukkan nama lengkap Anda"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="no_hp">Nomor WhatsApp / Telepon</label>
+            <input
+              type="tel"
+              id="no_hp"
+              name="no_hp"
+              class="form-control"
+              placeholder="Contoh: 081234567890"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="agama">Tradisi / Kepercayaan</label>
+            <select id="agama" name="agama" class="form-control" required>
+              <option value="">-- Pilih Agama / Kepercayaan --</option>
+              <option value="Islam">Islam</option>
+              <option value="Kristen">Kristen</option>
+              <option value="Katolik">Katolik</option>
+              <option value="Hindu">Hindu</option>
+              <option value="Buddha">Buddha</option>
+              <option value="Khonghucu">Khonghucu</option>
+              <option value="Lainnya">Lainnya / Umum</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="topik">Topik Konsultasi</label>
+            <select id="topik" name="topik" class="form-control" required>
+              <option value="">-- Pilih Topik Konsultasi --</option>
+              <option value="Paket Perlengkapan & Peti">
+                Paket Perlengkapan & Peti
+              </option>
+              <option value="Lahan Pemakaman (TPU)">
+                Lahan Pemakaman (TPU)
+              </option>
+              <option value="Prosesi Kremasi & Guci Abu">
+                Prosesi Kremasi & Guci Abu
+              </option>
+              <option value="Layanan Ambulans Darurat">
+                Layanan Ambulans Darurat
+              </option>
+              <option value="Pengurusan Akta Kematian (Dukcapil)">
+                Pengurusan Akta Kematian (Dukcapil)
+              </option>
+              <option value="Lainnya">Pertanyaan Umum Lainnya</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="pesan">Pesan / Detail Bantuan yang Dibutuhkan</label>
+            <textarea
+              id="pesan"
+              name="pesan"
+              class="form-control"
+              placeholder="Tuliskan kendala atau informasi yang ingin ditanyakan secara detail..."
+              required
+            ></textarea>
+          </div>
+
+          <button type="submit" class="btn-submit">
+            Kirim Lembar Konsultasi
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <p>
+        &copy; 2026 <strong>GoKematian Project</strong>. Layanan Pelayanan
+        Publik Duka Cita Terpadu Multagama.
+      </p>
+    </footer>
+  </body>
+</html>

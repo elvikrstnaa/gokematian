@@ -1,0 +1,449 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Perlengkapan - Paket Perlengkapan Duka Cita Inklusif</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <style>
+      body {
+        background-color: #f4f7f4;
+        font-family:
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          Roboto,
+          Helvetica,
+          Arial,
+          sans-serif;
+        margin: 0;
+        padding: 0;
+        color: #2c3e50;
+      }
+
+      /* Navbar Seragam Beranda */
+      .header-nav {
+        background-color: #1e5631;
+        padding: 16px 40px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .header-logo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: #ffffff;
+        font-size: 1.35rem;
+        font-weight: 700;
+        text-decoration: none;
+      }
+
+      .header-badge {
+        background: rgba(255, 255, 255, 0.15);
+        color: #ffffff;
+        padding: 6px 16px;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        text-decoration: none;
+        font-weight: 500;
+        transition: background 0.2s;
+      }
+
+      .header-badge:hover {
+        background: rgba(255, 255, 255, 0.25);
+      }
+
+      /* Hero Banner Mini */
+      .hero-mini {
+        text-align: center;
+        padding: 40px 20px 10px;
+      }
+
+      .hero-title {
+        color: #1e5631;
+        font-size: 2rem;
+        font-weight: 800;
+        margin: 0 0 10px 0;
+      }
+
+      .hero-subtitle {
+        color: #555555;
+        font-size: 0.98rem;
+        max-width: 650px;
+        margin: 0 auto;
+        line-height: 1.5;
+      }
+
+      /* Filter Agama Container */
+      .filter-container {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin: 25px 0 10px;
+      }
+
+      .filter-btn {
+        background-color: #ffffff;
+        border: 2px solid #1e5631;
+        color: #1e5631;
+        padding: 8px 18px;
+        border-radius: 25px;
+        cursor: pointer;
+        font-weight: 600;
+        font-size: 0.88rem;
+        transition: all 0.2s ease;
+      }
+
+      .filter-btn:hover,
+      .filter-btn.active {
+        background-color: #1e5631;
+        color: #ffffff;
+      }
+
+      /* Grid Paket Container */
+      .container {
+        max-width: 1100px;
+        margin: 20px auto 60px;
+        padding: 0 20px;
+      }
+
+      .package-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+        gap: 25px;
+      }
+
+      /* Card Item Paket */
+      .package-card {
+        background: #ffffff;
+        border-radius: 18px;
+        padding: 30px 25px;
+        box-shadow: 0 10px 25px rgba(30, 86, 49, 0.06);
+        border: 1px solid #e2ebe2;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        position: relative;
+        transition:
+          transform 0.2s,
+          box-shadow 0.2s;
+      }
+
+      .package-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 14px 30px rgba(30, 86, 49, 0.12);
+      }
+
+      .package-badge {
+        position: absolute;
+        top: 18px;
+        right: 18px;
+        background: #e8f5e9;
+        color: #1e5631;
+        font-size: 0.78rem;
+        font-weight: 700;
+        padding: 5px 12px;
+        border-radius: 12px;
+      }
+
+      .package-icon {
+        font-size: 45px;
+        text-align: center;
+        margin-bottom: 15px;
+      }
+
+      .package-title {
+        color: #1e5631;
+        font-size: 1.3rem;
+        font-weight: 700;
+        margin: 0 0 5px;
+        text-align: center;
+      }
+
+      .package-subhead {
+        text-align: center;
+        font-size: 0.82rem;
+        color: #777;
+        margin-bottom: 15px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+
+      .package-price {
+        text-align: center;
+        font-size: 1.3rem;
+        font-weight: 800;
+        color: #2c3e50;
+        margin-bottom: 20px;
+      }
+
+      .package-features {
+        list-style: none;
+        padding: 0;
+        margin: 0 0 25px 0;
+        font-size: 0.9rem;
+        color: #555;
+        line-height: 1.8;
+      }
+
+      .package-features li {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .btn-select {
+        display: block;
+        width: 100%;
+        background-color: #1e5631;
+        color: #ffffff;
+        text-align: center;
+        text-decoration: none;
+        padding: 12px 0;
+        border-radius: 10px;
+        font-size: 0.95rem;
+        font-weight: 700;
+        box-sizing: border-box;
+        transition: background 0.2s;
+        border: none;
+        cursor: pointer;
+      }
+
+      .btn-select:hover {
+        background-color: #174426;
+      }
+
+      footer {
+        text-align: center;
+        padding: 20px;
+        color: #666666;
+        font-size: 0.85rem;
+        border-top: 1px solid #e2ebe2;
+        background: #ffffff;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header Navbar Tema GoKematian -->
+    <header class="header-nav">
+      <a href="/" class="header-logo">
+        <span>🕊️ GoKematian - Perlengkapan</span>
+      </a>
+      <a href="/" class="header-badge">&larr; Kembali ke Beranda</a>
+    </header>
+
+    <!-- Hero Banner Mini -->
+    <div class="hero-mini">
+      <h1 class="hero-title">Perlengkapan Duka Cita</h1>
+      <p class="hero-subtitle">
+        Layanan penyediaan perlengkapan duka cita dan fasilitas pemulasaran
+        terpadu yang siap diantarkan langsung ke lokasi sesuai tradisi dan
+        kepercayaan keluarga.
+      </p>
+
+      <!-- Filter Kategori Agama -->
+      <div class="filter-container">
+        <button class="filter-btn active" onclick="filterAgama('semua', this)">
+          Semua Agama
+        </button>
+        <button class="filter-btn" onclick="filterAgama('islam', this)">
+          Islam
+        </button>
+        <button class="filter-btn" onclick="filterAgama('kristen', this)">
+          Kristen & Katolik
+        </button>
+        <button class="filter-btn" onclick="filterAgama('hindu', this)">
+          Hindu
+        </button>
+        <button class="filter-btn" onclick="filterAgama('buddha', this)">
+          Buddha & Khonghucu
+        </button>
+      </div>
+    </div>
+
+    <!-- Package Cards Grid -->
+    <div class="container">
+      <div class="package-grid">
+        <!-- ISLAM: Paket Dasar Pemulasaran -->
+        <div class="package-card" data-agama="islam">
+          <div class="package-badge">Islam - Basic</div>
+          <div class="package-icon">📦</div>
+          <h3 class="package-title">Paket Fitrah</h3>
+          <div class="package-subhead">Dasar Pemulasaran</div>
+          <div class="package-price">Rp 450.000</div>
+          <ul class="package-features">
+            <li>✔️ Kain Kafan Premium (Laki-laki / Perempuan)</li>
+            <li>✔️ Kapas Sanitasi & Sabun Bidara</li>
+            <li>✔️ Parfum Non-Alkohol & Kapur Barus</li>
+            <li>✔️ Tali Pengikat Kafan & Air Mawar</li>
+            <li>✔️ Papan Nisan Kayu Sementara</li>
+          </ul>
+          <a
+            href="/perlengkapan/form?paket=Paket%20Fitrah%20(Islam)"
+            class="btn-select"
+            >Pilih Paket ini</a
+          >
+        </div>
+
+        <!-- ISLAM: Paket Lengkap Duka Cita -->
+        <div
+          class="package-card"
+          data-agama="islam"
+          style="border: 2px solid #1e5631"
+        >
+          <div
+            class="package-badge"
+            style="background-color: #1e5631; color: white"
+          >
+            Paling Populer
+          </div>
+          <div class="package-icon">🕋</div>
+          <h3 class="package-title">Paket Al-Ikhlas</h3>
+          <div class="package-subhead">Islam - Lengkap</div>
+          <div class="package-price">Rp 850.000</div>
+          <ul class="package-features">
+            <li>✔️ Seluruh Isi Paket Fitrah</li>
+            <li>✔️ Sewa Kain Penutup Keranda Hijau</li>
+            <li>✔️ Tikar Pandan & Payung Pengiring</li>
+            <li>✔️ Bendera Kuning (4 Buah)</li>
+            <li>✔️ Nisan Kayu Jati Ukir Nama</li>
+          </ul>
+          <a
+            href="/perlengkapan/form?paket=Paket%20Al-Ikhlas%20(Islam)"
+            class="btn-select"
+            >Pilih Paket ini</a
+          >
+        </div>
+
+        <!-- KRISTEN / KATOLIK: Paket Basic -->
+        <div class="package-card" data-agama="kristen">
+          <div class="package-badge">Kristen / Katolik</div>
+          <div class="package-icon">✝️</div>
+          <h3 class="package-title">Paket Grace</h3>
+          <div class="package-subhead">Basic Persemayaman</div>
+          <div class="package-price">Rp 1.200.000</div>
+          <ul class="package-features">
+            <li>✔️ Peti Jenazah Kayu Standar</li>
+            <li>✔️ Salib Kayu Nisan & Pakaian Duka</li>
+            <li>✔️ Lilin Duka & Tempat Lilin</li>
+            <li>✔️ Minyak Wangi Persemayaman</li>
+            <li>✔️ Pengurusan Lokasi Pemakaman</li>
+          </ul>
+          <a
+            href="/perlengkapan/form?paket=Paket%20Grace%20(Kristen)"
+            class="btn-select"
+            >Pilih Paket ini</a
+          >
+        </div>
+
+        <!-- KRISTEN / KATOLIK: Paket Lengkap VVIP -->
+        <div
+          class="package-card"
+          data-agama="kristen"
+          style="border: 2px solid #1e5631"
+        >
+          <div
+            class="package-badge"
+            style="background-color: #1e5631; color: white"
+          >
+            Lengkap & VVIP
+          </div>
+          <div class="package-icon">⚰️</div>
+          <h3 class="package-title">Paket Emmanuel</h3>
+          <div class="package-subhead">Kristen / Katolik - VVIP</div>
+          <div class="package-price">Rp 2.500.000</div>
+          <ul class="package-features">
+            <li>✔️ Seluruh Isi Paket Grace</li>
+            <li>✔️ Peti Jenazah Ukir Premium</li>
+            <li>✔️ Papan Bunga Duka Cita</li>
+            <li>✔️ Dekorasi Bunga Segar Persemayaman</li>
+            <li>✔️ Buku Tamu Duka & Salib Ukir Jati</li>
+          </ul>
+          <a
+            href="/perlengkapan/form?paket=Paket%20Emmanuel%20(Kristen)"
+            class="btn-select"
+            >Pilih Paket ini</a
+          >
+        </div>
+
+        <!-- HINDU: Paket Kremasi / Ngaben -->
+        <div class="package-card" data-agama="hindu">
+          <div class="package-badge">Hindu</div>
+          <div class="package-icon">🕉️</div>
+          <h3 class="package-title">Paket Shanti</h3>
+          <div class="package-subhead">Prosesi Kremasi / Ngaben</div>
+          <div class="package-price">Rp 1.100.000</div>
+          <ul class="package-features">
+            <li>✔️ Kain Pengafanan Suci (Putih / Kuning)</li>
+            <li>✔️ Dupa Aromaterapi & Minyak Suci</li>
+            <li>✔️ Bunga Tabur & Tirta Pembersihan</li>
+            <li>✔️ Guci Abu Ukir (Tempat Penyimpanan Abu)</li>
+            <li>✔️ Perlengkapan Ritual Pembakaran Standar</li>
+          </ul>
+          <a
+            href="/perlengkapan/form?paket=Paket%20Shanti%20(Hindu)"
+            class="btn-select"
+            >Pilih Paket ini</a
+          >
+        </div>
+
+        <!-- BUDDHA / KHONGHUCU: Paket Altar & Persemayaman -->
+        <div class="package-card" data-agama="buddha">
+          <div class="package-badge">Buddha / Khonghucu</div>
+          <div class="package-icon">☸️</div>
+          <h3 class="package-title">Paket Lotus</h3>
+          <div class="package-subhead">Altar & Persemayaman</div>
+          <div class="package-price">Rp 1.800.000</div>
+          <ul class="package-features">
+            <li>✔️ Peti Persemayaman / Kremasi Kayu</li>
+            <li>✔️ Dupa Hio, Tempat Dupa, & Lilin Merah</li>
+            <li>✔️ Kertas Sembahyang (Joss Paper)</li>
+            <li>✔️ Dekorasi Meja Altar (Bunga & Buah)</li>
+            <li>✔️ Guci / Kotak Tempat Abu Kremasi</li>
+          </ul>
+          <a
+            href="/perlengkapan/form?paket=Paket%20Lotus%20(Buddha)"
+            class="btn-select"
+            >Pilih Paket ini</a
+          >
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <p>
+        &copy; 2026 <strong>GoKematian Project</strong>. Layanan Pelayanan
+        Publik Duka Cita Terpadu Multagama.
+      </p>
+    </footer>
+
+    <!-- JavaScript Filter Agama -->
+    <script>
+      function filterAgama(kategori, btnElement) {
+        const cards = document.querySelectorAll(".package-card");
+        const buttons = document.querySelectorAll(".filter-btn");
+
+        buttons.forEach((btn) => btn.classList.remove("active"));
+        if (btnElement) {
+          btnElement.classList.add("active");
+        }
+
+        cards.forEach((card) => {
+          const cardAgama = card.getAttribute("data-agama");
+          if (kategori === "semua" || cardAgama === kategori) {
+            card.style.display = "flex";
+          } else {
+            card.style.display = "none";
+          }
+        });
+      }
+    </script>
+  </body>
+</html>

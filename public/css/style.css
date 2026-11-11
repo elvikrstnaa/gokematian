@@ -1,0 +1,353 @@
+/* Core Styling & Variables (Estetik, Anggun & Khidmat) */
+:root {
+  --primary-color: #1a4325;
+  --primary-dark: #0f2b18;
+  --primary-light: #255d34;
+  --accent-gold: #c5a059;
+  --accent-gold-light: rgba(197, 160, 89, 0.15);
+  --secondary-color: #e8f5e9;
+  --bg-color: #f7f9f6;
+  --card-bg: #ffffff;
+  --text-primary: #1c2826;
+  --text-secondary: #556b2f;
+  --text-muted: #64748b;
+  --border-color: #e2ebe2;
+  --card-shadow: 0 10px 30px rgba(26, 67, 37, 0.06);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family:
+    "Plus Jakarta Sans",
+    "Segoe UI",
+    system-ui,
+    -apple-system,
+    sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+}
+
+/* Header & Navbar Estetik */
+.header-nav,
+.navbar {
+  background: linear-gradient(
+    135deg,
+    var(--primary-color) 0%,
+    var(--primary-dark) 100%
+  );
+  color: #ffffff;
+  padding: 18px 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 4px 20px rgba(15, 43, 24, 0.15);
+  border-bottom: 2px solid var(--accent-gold);
+}
+
+.header-logo,
+.navbar h2 {
+  margin: 0;
+  font-size: 1.45rem;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  color: #ffffff;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.header-badge,
+.navbar span {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.15);
+  padding: 6px 16px;
+  border-radius: 20px;
+  text-decoration: none;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.2s ease;
+}
+
+.header-badge:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+/* Hero Section Lebih Luas dengan Pattern Ornamen Subtle */
+.hero-section,
+.hero {
+  position: relative;
+  background:
+    radial-gradient(
+      circle at top center,
+      rgba(197, 160, 89, 0.08) 0%,
+      transparent 70%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(30, 125, 50, 0.04) 0%,
+      rgba(247, 249, 246, 1) 100%
+    );
+  padding: 65px 20px 45px;
+  text-align: center;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.hero-title,
+.hero h1 {
+  font-size: 2.6rem;
+  font-weight: 800;
+  color: var(--primary-color);
+  margin-bottom: 15px;
+  line-height: 1.25;
+  letter-spacing: -0.5px;
+}
+
+.hero-subtitle,
+.hero p {
+  font-size: 1.1rem;
+  color: #4a5568;
+  max-width: 680px;
+  margin: 0 auto 30px;
+  line-height: 1.6;
+}
+
+/* Features Chips / Stats Bar */
+.hero-chips,
+.stats-bar {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 30px;
+  flex-wrap: wrap;
+}
+
+.chip-item,
+.stat-item {
+  background: #ffffff;
+  padding: 10px 22px;
+  border-radius: 25px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  box-shadow: 0 4px 15px rgba(26, 67, 37, 0.06);
+  border: 1px solid rgba(197, 160, 89, 0.3);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Main Container Diperlebar */
+.main-container,
+.container {
+  max-width: 1350px;
+  margin: 45px auto 70px;
+  padding: 0 25px;
+}
+
+.section-label,
+.section-title {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--primary-color);
+  border-left: 4px solid var(--accent-gold);
+  padding-left: 14px;
+  margin-bottom: 30px;
+}
+
+/* Grid Layout Kartu Estetik & Variatif */
+.services-grid,
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 22px;
+}
+
+.service-card,
+.card {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 18px;
+  padding: 30px 22px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: var(--card-shadow);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* Garis Pembatas Gradasi Emas (Ornamen Atas Kartu) */
+.service-card::before,
+.card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary-color), var(--accent-gold));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.service-card:hover,
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 18px 36px rgba(26, 67, 37, 0.12);
+  border-color: rgba(197, 160, 89, 0.4);
+}
+
+.service-card:hover::before,
+.card:hover::before {
+  opacity: 1;
+}
+
+.card-icon {
+  font-size: 45px;
+  margin-bottom: 15px;
+}
+
+/* Badge Sentuhan Emas Tipis */
+.card-badge,
+.badge {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background-color: var(--accent-gold-light);
+  color: #8c6d27;
+  border: 1px solid rgba(197, 160, 89, 0.3);
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 10px;
+}
+
+.card-title,
+.card h3 {
+  color: var(--primary-color);
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin: 10px 0 8px;
+}
+
+.card-desc,
+.card p {
+  color: var(--text-muted);
+  font-size: 0.88rem;
+  line-height: 1.55;
+  margin-bottom: 22px;
+  flex-grow: 1;
+}
+
+/* Tombol Akses Utama (Gradasi Halus) */
+.btn-action,
+.btn-primary {
+  display: block;
+  width: 100%;
+  background: linear-gradient(
+    135deg,
+    var(--primary-color) 0%,
+    var(--primary-dark) 100%
+  );
+  color: #ffffff !important;
+  border: none;
+  padding: 12px 0;
+  border-radius: 12px;
+  font-size: 0.92rem;
+  font-weight: 700;
+  text-decoration: none !important;
+  text-align: center;
+  box-sizing: border-box;
+  box-shadow: 0 4px 12px rgba(26, 67, 37, 0.15);
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.btn-action:hover,
+.btn-primary:hover {
+  background: linear-gradient(
+    135deg,
+    var(--primary-light) 0%,
+    var(--primary-color) 100%
+  );
+  box-shadow: 0 6px 16px rgba(26, 67, 37, 0.25);
+}
+
+/* Footer Anggun */
+footer {
+  text-align: center;
+  padding: 30px;
+  background-color: #ffffff;
+  border-top: 1px solid var(--border-color);
+  color: var(--text-muted);
+  font-size: 0.88rem;
+  margin-top: 60px;
+}
+
+/* Styling Tombol Darurat Melayang (Quick Floating Emergency 24/7) */
+.floating-emergency-btn {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  background: linear-gradient(135deg, #d32f2f 0%, #9a0007 100%);
+  color: #ffffff !important;
+  padding: 12px 20px;
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none !important;
+  font-weight: 700;
+  font-size: 0.95rem;
+  box-shadow: 0 6px 20px rgba(211, 47, 47, 0.4);
+  z-index: 9999;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  border: 2px solid #ffffff;
+  animation: pulse-emergency 2s infinite;
+}
+
+.floating-emergency-btn:hover {
+  transform: scale(1.08) translateY(-3px);
+  box-shadow: 0 10px 25px rgba(211, 47, 47, 0.6);
+  background: linear-gradient(135deg, #e53935 0%, #c62828 100%);
+}
+
+.emergency-icon {
+  font-size: 1.4rem;
+}
+
+/* Animasi Denyut (Pulse Glow Red) */
+@keyframes pulse-emergency {
+  0% {
+    box-shadow: 0 0 0 0 rgba(211, 47, 47, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 14px rgba(211, 47, 47, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(211, 47, 47, 0);
+  }
+}
+
+/* Penyesuaian Responsif untuk Layar Handphone */
+@media (max-width: 600px) {
+  .floating-emergency-btn {
+    bottom: 15px;
+    right: 15px;
+    padding: 10px 16px;
+    font-size: 0.85rem;
+  }
+  .emergency-icon {
+    font-size: 1.2rem;
+  }
+}

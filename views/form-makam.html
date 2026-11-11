@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Form Pemesanan Lahan TPU - GoKematian</title>
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <!-- Navbar Header -->
+    <nav class="navbar">
+      <h2>📋 GoKematian - Form Pemesanan TPU</h2>
+      <a
+        href="/makam.html"
+        style="
+          color: white;
+          text-decoration: none;
+          font-weight: 600;
+          font-size: 0.95rem;
+          background: rgba(255, 255, 255, 0.15);
+          padding: 6px 14px;
+          border-radius: 8px;
+        "
+        >&larr; Kembali ke Daftar TPU</a
+      >
+    </nav>
+
+    <div class="container">
+      <div
+        style="
+          max-width: 600px;
+          margin: 40px auto;
+          background-color: #ffffff;
+          border: 1px solid #e0eae0;
+          border-radius: 16px;
+          padding: 35px;
+          box-shadow: 0 8px 24px rgba(30, 125, 50, 0.08);
+          text-align: left;
+        "
+      >
+        <h2
+          style="
+            color: #1b5e20;
+            margin-top: 0;
+            margin-bottom: 8px;
+            font-size: 1.6rem;
+            text-align: center;
+          "
+        >
+          Formulir Pemesanan Petak Makam
+        </h2>
+        <p
+          style="
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 30px;
+            text-align: center;
+          "
+        >
+          Silakan isi data pengajuan lahan TPU di bawah ini.
+        </p>
+
+        <form action="/makam/order" method="POST">
+          <div style="margin-bottom: 20px">
+            <label
+              style="
+                display: block;
+                margin-bottom: 8px;
+                font-weight: 600;
+                color: #1c2826;
+                font-size: 0.95rem;
+              "
+              >Pilih Lokasi TPU:</label
+            >
+            <select
+              id="selectTpu"
+              name="namaTPU"
+              required
+              style="
+                width: 100%;
+                padding: 12px 14px;
+                border-radius: 10px;
+                border: 1px solid #ccc;
+                font-size: 0.95rem;
+                box-sizing: border-box;
+                background-color: #fff;
+                outline: none;
+                cursor: pointer;
+              "
+            >
+              <option value="">-- Pilih Lokasi TPU --</option>
+              <option value="TPU Payung Sekaki">
+                TPU Payung Sekaki (Jl. Durian)
+              </option>
+              <option value="TPU Tampan">
+                TPU Tampan (Jl. HR. Soebrantas)
+              </option>
+              <option value="TPU Umban Sari">TPU Umban Sari (Rumbai)</option>
+              <option value="TPU Palas">TPU Palas (Rumbai)</option>
+              <option value="TPU Lokomotif">
+                TPU Lokomotif (Kec. Limapuluh)
+              </option>
+              <option value="TPU Kuini">TPU Kuini (Kec. Marpoyan Damai)</option>
+            </select>
+          </div>
+
+          <div style="margin-bottom: 20px">
+            <label
+              style="
+                display: block;
+                margin-bottom: 8px;
+                font-weight: 600;
+                color: #1c2826;
+                font-size: 0.95rem;
+              "
+              >Pilih Blok Petak:</label
+            >
+            <select
+              name="blokPetak"
+              required
+              style="
+                width: 100%;
+                padding: 12px 14px;
+                border-radius: 10px;
+                border: 1px solid #ccc;
+                font-size: 0.95rem;
+                box-sizing: border-box;
+                background-color: #fff;
+                outline: none;
+                cursor: pointer;
+              "
+            >
+              <option value="Blok A">Blok A</option>
+              <option value="Blok B">Blok B</option>
+              <option value="Blok C">Blok C</option>
+              <option value="Blok D">Blok D</option>
+            </select>
+          </div>
+
+          <div style="margin-bottom: 20px">
+            <label
+              style="
+                display: block;
+                margin-bottom: 8px;
+                font-weight: 600;
+                color: #1c2826;
+                font-size: 0.95rem;
+              "
+              >Nama Lengkap Almarhum/Almarhumah:</label
+            >
+            <input
+              type="text"
+              name="namaAlmarhum"
+              required
+              placeholder="Masukkan nama mendiang"
+              style="
+                width: 100%;
+                padding: 12px 14px;
+                border-radius: 10px;
+                border: 1px solid #ccc;
+                font-size: 0.95rem;
+                box-sizing: border-box;
+                outline: none;
+              "
+            />
+          </div>
+
+          <div style="margin-bottom: 20px">
+            <label
+              style="
+                display: block;
+                margin-bottom: 8px;
+                font-weight: 600;
+                color: #1c2826;
+                font-size: 0.95rem;
+              "
+              >Nama Pemohon (Keluarga):</label
+            >
+            <input
+              type="text"
+              name="namaPemohon"
+              required
+              placeholder="Masukkan nama pemohon"
+              style="
+                width: 100%;
+                padding: 12px 14px;
+                border-radius: 10px;
+                border: 1px solid #ccc;
+                font-size: 0.95rem;
+                box-sizing: border-box;
+                outline: none;
+              "
+            />
+          </div>
+
+          <div style="margin-bottom: 25px">
+            <label
+              style="
+                display: block;
+                margin-bottom: 8px;
+                font-weight: 600;
+                color: #1c2826;
+                font-size: 0.95rem;
+              "
+              >Nomor Telepon / WhatsApp:</label
+            >
+            <input
+              type="tel"
+              name="noHP"
+              required
+              placeholder="08xxxxxxxxxx"
+              style="
+                width: 100%;
+                padding: 12px 14px;
+                border-radius: 10px;
+                border: 1px solid #ccc;
+                font-size: 0.95rem;
+                box-sizing: border-box;
+                outline: none;
+              "
+            />
+          </div>
+
+          <button
+            type="submit"
+            class="btn-primary"
+            style="padding: 14px; font-size: 1rem"
+          >
+            Konfirmasi Pemesanan
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <p>
+        &copy; 2026 <strong>GoKematian Project</strong>. Layanan Duka Cita
+        Terpadu.
+      </p>
+    </footer>
+
+    <!-- Script Penyelaras Parameter URL dari Halaman Makam -->
+    <script>
+      const urlParams = new URLSearchParams(window.location.search);
+      const selectedTpu = urlParams.get("tpuName");
+      if (selectedTpu) {
+        document.getElementById("selectTpu").value = selectedTpu;
+      }
+    </script>
+  </body>
+</html>

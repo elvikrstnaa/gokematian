@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ambulance - Pemesanan Ambulans Darurat</title>
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <!-- Header Navbar -->
+    <nav class="navbar">
+      <h2>🚑 GoKematian - Ambulance</h2>
+      <a
+        href="/"
+        style="
+          color: white;
+          text-decoration: none;
+          font-weight: 600;
+          font-size: 0.95rem;
+          background: rgba(255, 255, 255, 0.15);
+          padding: 6px 14px;
+          border-radius: 8px;
+        "
+        >&larr; Kembali ke Beranda</a
+      >
+    </nav>
+
+    <!-- Hero Header -->
+    <header class="hero" style="padding: 35px 20px">
+      <h1>Pemesanan Ambulans Darurat 24/7</h1>
+      <p>Silakan isi lokasi penjemputan dan tujuan pengantaran jenazah.</p>
+    </header>
+
+    <div class="container">
+      <!-- Card Formulir Pemesanan Ambulance Mandiri -->
+      <div
+        style="
+          max-width: 600px;
+          margin: 40px auto;
+          background-color: #ffffff;
+          border: 1px solid #e0eae0;
+          border-radius: 16px;
+          padding: 35px;
+          box-shadow: 0 8px 24px rgba(30, 125, 50, 0.08);
+          text-align: left;
+        "
+      >
+        <h2
+          style="
+            color: #1b5e20;
+            margin-top: 0;
+            margin-bottom: 8px;
+            font-size: 1.6rem;
+            text-align: center;
+          "
+        >
+          Formulir Pemesanan Ambulans
+        </h2>
+        <p
+          style="
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 30px;
+            text-align: center;
+          "
+        >
+          Armada ambulans siaga melayani 24 jam
+        </p>
+
+        <form action="/ambulance/order" method="POST">
+          <div style="margin-bottom: 20px">
+            <label
+              style="
+                display: block;
+                margin-bottom: 8px;
+                font-weight: 600;
+                color: #1c2826;
+                font-size: 0.95rem;
+              "
+              >Nama Pemesan:</label
+            >
+            <input
+              type="text"
+              name="nama"
+              placeholder="Masukkan nama lengkap"
+              required
+              style="
+                width: 100%;
+                padding: 12px 14px;
+                border-radius: 10px;
+                border: 1px solid #ccc;
+                font-size: 0.95rem;
+                box-sizing: border-box;
+                outline: none;
+              "
+            />
+          </div>
+
+          <div style="margin-bottom: 20px">
+            <label
+              style="
+                display: block;
+                margin-bottom: 8px;
+                font-weight: 600;
+                color: #1c2826;
+                font-size: 0.95rem;
+              "
+              >Nomor Telepon / WhatsApp:</label
+            >
+            <input
+              type="tel"
+              name="telepon"
+              placeholder="Contoh: 081234567890"
+              required
+              style="
+                width: 100%;
+                padding: 12px 14px;
+                border-radius: 10px;
+                border: 1px solid #ccc;
+                font-size: 0.95rem;
+                box-sizing: border-box;
+                outline: none;
+              "
+            />
+          </div>
+
+          <div style="margin-bottom: 20px">
+            <label
+              style="
+                display: block;
+                margin-bottom: 8px;
+                font-weight: 600;
+                color: #1c2826;
+                font-size: 0.95rem;
+              "
+              >Lokasi Penjemputan:</label
+            >
+            <textarea
+              name="pickup"
+              rows="3"
+              placeholder="Alamat rumah duka / Rumah Sakit"
+              required
+              style="
+                width: 100%;
+                padding: 12px 14px;
+                border-radius: 10px;
+                border: 1px solid #ccc;
+                font-size: 0.95rem;
+                box-sizing: border-box;
+                font-family: inherit;
+                resize: vertical;
+                outline: none;
+              "
+            ></textarea>
+          </div>
+
+          <div style="margin-bottom: 25px">
+            <label
+              style="
+                display: block;
+                margin-bottom: 8px;
+                font-weight: 600;
+                color: #1c2826;
+                font-size: 0.95rem;
+              "
+              >Lokasi Tujuan (TPU / Pemakaman):</label
+            >
+            <textarea
+              name="destination"
+              rows="3"
+              placeholder="Alamat TPU atau lokasi pemakaman"
+              required
+              style="
+                width: 100%;
+                padding: 12px 14px;
+                border-radius: 10px;
+                border: 1px solid #ccc;
+                font-size: 0.95rem;
+                box-sizing: border-box;
+                font-family: inherit;
+                resize: vertical;
+                outline: none;
+              "
+            ></textarea>
+          </div>
+
+          <button
+            type="submit"
+            class="btn-primary"
+            style="padding: 14px; font-size: 1rem"
+          >
+            Pesan Ambulans Sekarang
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <p>
+        &copy; 2026 <strong>GoKematian Project</strong>. Layanan Duka Cita
+        Terpadu.
+      </p>
+    </footer>
+  </body>
+</html>

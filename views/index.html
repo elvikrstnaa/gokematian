@@ -1,0 +1,318 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GoKematian - Sistem Informasi Services Duka Cita Terpadu</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family:
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          Roboto,
+          Helvetica,
+          Arial,
+          sans-serif;
+      }
+
+      body {
+        background-color: #f4f7f4;
+        color: #2c3e50;
+      }
+
+      /* Header Nav */
+      .header-nav {
+        background-color: #1e5631;
+        padding: 16px 40px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .header-logo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: #ffffff;
+        font-size: 1.35rem;
+        font-weight: 700;
+        text-decoration: none;
+      }
+
+      .header-badge {
+        background: rgba(255, 255, 255, 0.15);
+        color: #ffffff;
+        padding: 6px 16px;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        text-decoration: none;
+        font-weight: 500;
+      }
+
+      /* Hero Section */
+      .hero-section {
+        text-align: center;
+        padding: 60px 20px 40px;
+        max-width: 900px;
+        margin: 0 auto;
+      }
+
+      .hero-title {
+        color: #1e5631;
+        font-size: 2.5rem;
+        font-weight: 800;
+        margin-bottom: 15px;
+        line-height: 1.2;
+      }
+
+      .hero-subtitle {
+        color: #555555;
+        font-size: 1.05rem;
+        line-height: 1.6;
+        margin-bottom: 30px;
+      }
+
+      /* Features Chips */
+      .hero-chips {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        flex-wrap: wrap;
+        margin-bottom: 50px;
+      }
+
+      .chip-item {
+        background: #ffffff;
+        padding: 10px 20px;
+        border-radius: 25px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: #1e5631;
+        box-shadow: 0 4px 12px rgba(30, 86, 49, 0.08);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      /* Main Content Container */
+      .main-container {
+        max-width: 1350px;
+        margin: 0 auto 60px;
+        padding: 0 20px;
+      }
+
+      .section-label {
+        font-size: 1.4rem;
+        font-weight: 800;
+        color: #1e5631;
+        margin-bottom: 25px;
+        border-left: 4px solid #1e5631;
+        padding-left: 12px;
+      }
+
+      /* Services Grid Layout */
+      .services-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 20px;
+      }
+
+      .service-card {
+        background: #ffffff;
+        border-radius: 18px;
+        padding: 28px 20px;
+        box-shadow: 0 10px 25px rgba(30, 86, 49, 0.06);
+        border: 1px solid #e2ebe2;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        position: relative;
+        text-align: center;
+        transition:
+          transform 0.2s,
+          box-shadow 0.2s;
+      }
+
+      .service-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 14px 30px rgba(30, 86, 49, 0.12);
+      }
+
+      .card-badge {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        background: #e8f5e9;
+        color: #1e5631;
+        font-size: 0.72rem;
+        font-weight: 700;
+        padding: 4px 10px;
+        border-radius: 10px;
+      }
+
+      .card-icon {
+        font-size: 45px;
+        margin-bottom: 15px;
+      }
+
+      .card-title {
+        color: #1e5631;
+        font-size: 1.25rem;
+        font-weight: 700;
+        margin-bottom: 10px;
+      }
+
+      .card-desc {
+        color: #666666;
+        font-size: 0.85rem;
+        line-height: 1.5;
+        margin-bottom: 20px;
+        flex-grow: 1;
+      }
+
+      .btn-action {
+        display: block;
+        width: 100%;
+        background-color: #1e5631;
+        color: #ffffff;
+        text-align: center;
+        text-decoration: none;
+        padding: 11px 0;
+        border-radius: 10px;
+        font-size: 0.9rem;
+        font-weight: 700;
+        transition: background 0.2s;
+      }
+
+      .btn-action:hover {
+        background-color: #174426;
+      }
+
+      footer {
+        text-align: center;
+        padding: 25px;
+        color: #666666;
+        font-size: 0.85rem;
+        border-top: 1px solid #e2ebe2;
+        background: #ffffff;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <header class="header-nav">
+      <a href="/" class="header-logo">
+        <span>🕊️ GoKematian</span>
+      </a>
+      <span class="header-badge">Layanan Pelayanan Publik Duka Cita</span>
+    </header>
+
+    <!-- Hero Banner -->
+    <div class="hero-section">
+      <h1 class="hero-title">Mendampingi & Mempermudah Saat Duka</h1>
+      <p class="hero-subtitle">
+        Sistem informasi administrasi dan penanganan pemakaman terpadu berbasis
+        digital untuk kenyamanan keluarga.
+      </p>
+
+      <div class="hero-chips">
+        <div class="chip-item">⚡ Respon Darurat 24/7</div>
+        <div class="chip-item">📍 Integrasi TPU Pekanbaru</div>
+        <div class="chip-item">📋 Pengurusan Akta Resmi</div>
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="main-container">
+      <h2 class="section-label">Pilihan Layanan Utama</h2>
+
+      <div class="services-grid">
+        <!-- 1. Ambulance -->
+        <div class="service-card">
+          <span class="card-badge">Darurat 24 Jam</span>
+          <div class="card-icon">🚑</div>
+          <h3 class="card-title">Ambulance</h3>
+          <p class="card-desc">
+            Pemesanan unit ambulans jenazah darurat dengan armada standar
+            protokol kesehatan.
+          </p>
+          <a href="/ambulance" class="btn-action">Pesan Ambulans</a>
+        </div>
+
+        <!-- 2. Makam -->
+        <div class="service-card">
+          <span class="card-badge">Lahan TPU</span>
+          <div class="card-icon">🪦</div>
+          <h3 class="card-title">Makam</h3>
+          <p class="card-desc">
+            Reservasi petak lahan pemakaman (TPU) terintegrasi dengan pemetaan
+            lokasi.
+          </p>
+          <a href="/makam" class="btn-action">Booking TPU</a>
+        </div>
+
+        <!-- 3. Perlengkapan -->
+        <div class="service-card">
+          <span class="card-badge">Paket Lengkap</span>
+          <div class="card-icon">📦</div>
+          <h3 class="card-title">Perlengkapan</h3>
+          <p class="card-desc">
+            Penyediaan paket kain kafan, peti, nisan kayu, dan kelengkapan
+            pemulasaran terpadu multagama.
+          </p>
+          <a href="/perlengkapan" class="btn-action">Pilih Paket</a>
+        </div>
+
+        <!-- 4. Administrasi -->
+        <div class="service-card">
+          <span class="card-badge">Dukcapil</span>
+          <div class="card-icon">📄</div>
+          <h3 class="card-title">Administrasi</h3>
+          <p class="card-desc">
+            Layanan bantuan pengurusan dokumen Akta Kematian resmi ke Dinas
+            Pemakaman & Dukcapil.
+          </p>
+          <a href="/administrasi" class="btn-action">Urus Dokumen</a>
+        </div>
+
+        <!-- 5. Konsultasi -->
+        <div class="service-card">
+          <span class="card-badge">Bantuan 24/7</span>
+          <div class="card-icon">💬</div>
+          <h3 class="card-title">Konsultasi</h3>
+          <p class="card-desc">
+            Layanan konsultasi, panduan tata cara duka cita, dan bantuan
+            informasi pemulasaran.
+          </p>
+          <a href="/konsultasi" class="btn-action">Konsultasi Sekarang</a>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+      <p>
+        &copy; 2026 <strong>GoKematian Project</strong>. Layanan Pelayanan
+        Publik Duka Cita Terpadu Multagama.
+      </p>
+    </footer>
+
+    <!-- Tombol Darurat Melayang (Floating Emergency Button 24/7) -->
+    <a
+      href="https://wa.me/6281234567890?text=HALO%20DARURAT%20GoKematian!%20Saya%20membutuhkan%20ambulans%20jenazah%20secepatnya."
+      target="_blank"
+      class="floating-emergency-btn"
+      title="Panggilan Darurat Ambulans 24 Jam"
+    >
+      <span class="emergency-icon">🚑</span>
+      <span class="emergency-text">Darurat 24 Jam</span>
+    </a>
+  </body>
+</html>
