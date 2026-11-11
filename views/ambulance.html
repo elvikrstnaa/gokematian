@@ -67,7 +67,7 @@
           Armada ambulans siaga melayani 24 jam
         </p>
 
-        <form action="/ambulance/order" method="POST">
+        <form id="formAmbulance">
           <div style="margin-bottom: 20px">
             <label
               style="
@@ -81,6 +81,7 @@
             >
             <input
               type="text"
+              id="nama_pemesan"
               name="nama"
               placeholder="Masukkan nama lengkap"
               required
@@ -109,6 +110,7 @@
             >
             <input
               type="tel"
+              id="no_hp"
               name="telepon"
               placeholder="Contoh: 081234567890"
               required
@@ -136,6 +138,7 @@
               >Lokasi Penjemputan:</label
             >
             <textarea
+              id="lokasi_penjemputan"
               name="pickup"
               rows="3"
               placeholder="Alamat rumah duka / Rumah Sakit"
@@ -166,6 +169,7 @@
               >Lokasi Tujuan (TPU / Pemakaman):</label
             >
             <textarea
+              id="lokasi_tujuan"
               name="destination"
               rows="3"
               placeholder="Alamat TPU atau lokasi pemakaman"
@@ -186,8 +190,9 @@
 
           <button
             type="submit"
+            id="btnSubmit"
             class="btn-primary"
-            style="padding: 14px; font-size: 1rem"
+            style="padding: 14px; font-size: 1rem; width: 100%; cursor: pointer"
           >
             Pesan Ambulans Sekarang
           </button>
@@ -202,5 +207,50 @@
         Terpadu.
       </p>
     </footer>
+
+    <!-- Script Penanganan AJAX Form -->
+    <script>
+      document
+        .getElementById("formAmbulance")
+        .addEventListener("submit", async (e) => {
+          e.preventDefault();
+          const btn = document.getElementById("btnSubmit");
+          btn.disabled = true;
+          btn.innerText = "Memproses Pemesanan...";
+
+          const payload = {
+            nama_pemesan: document.getElementById("nama_pemesan").value,
+            no_hp: document.getElementById("no_hp").value,
+            lokasi_penjemputan:
+              document.getElementById("lokasi_penjemputan").value,
+            lokasi_tujuan: document.getElementById("lokasi_tujuan").value,
+          };
+
+          try {
+            const response = await fetch("/api/ambulance/order", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(payload),
+            });
+
+            const result = await response.json();
+
+            if (response.ok) {
+              alert(
+                "Pemesanan Ambulans Berhasil! Sistem sedang mencari driver terdekat.",
+              );
+              // Kosongkan form setelah berhasil
+              document.getElementById("formAmbulance").reset();
+            } else {
+              alert("Gagal Pemesanan: " + result.message);
+            }
+          } catch (err) {
+            alert("Terjadi kesalahan jaringan: " + err.message);
+          } finally {
+            btn.disabled = false;
+            btn.innerText = "Pesan Ambulans Sekarang";
+          }
+        });
+    </script>
   </body>
 </html>
