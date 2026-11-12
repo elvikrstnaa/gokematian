@@ -3,8 +3,270 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Ambulance - Pemesanan Ambulans Darurat</title>
+    <title>Ambulance - Pemesanan Ambulans Darurat | GoKematian</title>
     <link rel="stylesheet" href="/css/style.css" />
+    <style>
+      .amb-card {
+        max-width: 620px;
+        margin: 36px auto 50px;
+        background-color: #ffffff;
+        border: 1px solid #d9e6dc;
+        border-radius: 20px;
+        padding: 36px 34px;
+        box-shadow: 0 14px 34px rgba(27, 94, 32, 0.08);
+        text-align: left;
+      }
+
+      .amb-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: #e8f5e9;
+        color: #1b5e20;
+        font-size: 0.82rem;
+        font-weight: 700;
+        padding: 6px 14px;
+        border-radius: 999px;
+        margin-bottom: 12px;
+      }
+
+      .amb-dot {
+        width: 8px;
+        height: 8px;
+        background: #2e7d32;
+        border-radius: 50%;
+        animation: ambPulse 1.5s infinite;
+      }
+
+      @keyframes ambPulse {
+        0% { transform: scale(0.95); opacity: 0.75; }
+        50% { transform: scale(1.25); opacity: 1; }
+        100% { transform: scale(0.95); opacity: 0.75; }
+      }
+
+      .amb-header-box {
+        text-align: center;
+        margin-bottom: 28px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid #edf3ee;
+      }
+
+      .amb-header-box h2 {
+        color: #1b5e20;
+        margin: 0 0 6px;
+        font-size: 1.65rem;
+      }
+
+      .amb-header-box p {
+        color: #5c6b64;
+        font-size: 0.93rem;
+        margin: 0;
+      }
+
+      .amb-group {
+        margin-bottom: 20px;
+      }
+
+      .amb-label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 600;
+        color: #1c2826;
+        font-size: 0.94rem;
+      }
+
+      .amb-input {
+        width: 100%;
+        padding: 13px 15px;
+        border-radius: 12px;
+        border: 1.5px solid #cfdcd2;
+        background-color: #fbfdfb;
+        font-size: 0.95rem;
+        color: #1c2826;
+        box-sizing: border-box;
+        font-family: inherit;
+        transition: all 0.2s ease;
+      }
+
+      .amb-input:focus {
+        outline: none;
+        border-color: #2e7d32;
+        background-color: #ffffff;
+        box-shadow: 0 0 0 4px rgba(46, 125, 50, 0.12);
+      }
+
+      .amb-chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin-top: 8px;
+      }
+
+      .amb-chip {
+        background: #f1f7f2;
+        border: 1px solid #d2e4d5;
+        color: #2e5a34;
+        font-size: 0.78rem;
+        font-weight: 600;
+        padding: 5px 11px;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.15s ease;
+      }
+
+      .amb-chip:hover {
+        background: #2e7d32;
+        color: #ffffff;
+        border-color: #2e7d32;
+      }
+
+      .amb-btn-submit {
+        padding: 15px;
+        font-size: 1rem;
+        font-weight: 700;
+        width: 100%;
+        cursor: pointer;
+        border-radius: 12px;
+        border: none;
+        background: linear-gradient(135deg, #1b5e20 0%, #2e7d32 100%);
+        color: #ffffff;
+        box-shadow: 0 8px 18px rgba(27, 94, 32, 0.22);
+        transition: all 0.2s ease;
+      }
+
+      .amb-btn-submit:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 10px 22px rgba(27, 94, 32, 0.28);
+      }
+
+      .amb-btn-submit:disabled {
+        opacity: 0.7;
+        cursor: not-allowed;
+        transform: none;
+      }
+
+      .amb-error {
+        display: none;
+        background: #fef2f2;
+        border: 1px solid #fecaca;
+        color: #991b1b;
+        padding: 12px 16px;
+        border-radius: 12px;
+        font-size: 0.9rem;
+        margin-bottom: 18px;
+      }
+
+      /* Kartu Sukses (Menggantikan alert pop-up) */
+      .amb-success {
+        display: none;
+        text-align: center;
+        padding: 10px 0;
+      }
+
+      .amb-check {
+        width: 68px;
+        height: 68px;
+        background: #e8f5e9;
+        color: #1b5e20;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2rem;
+        font-weight: bold;
+        margin: 0 auto 16px;
+      }
+
+      .amb-success h3 {
+        color: #1b5e20;
+        font-size: 1.45rem;
+        margin: 0 0 8px;
+      }
+
+      .amb-success p {
+        color: #5c6b64;
+        font-size: 0.94rem;
+        margin: 0 0 22px;
+        line-height: 1.5;
+      }
+
+      .amb-ticket {
+        background: #f6faf7;
+        border: 1.5px dashed #b7d1bc;
+        border-radius: 14px;
+        padding: 16px 20px;
+        text-align: left;
+        margin-bottom: 24px;
+      }
+
+      .amb-ticket-row {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 9px 0;
+        border-bottom: 1px solid #e4eee6;
+        font-size: 0.92rem;
+      }
+
+      .amb-ticket-row:last-child {
+        border-bottom: none;
+      }
+
+      .amb-ticket-label {
+        color: #5c6b64;
+        flex-shrink: 0;
+      }
+
+      .amb-ticket-val {
+        font-weight: 600;
+        color: #1c2826;
+        text-align: right;
+      }
+
+      .amb-status-pill {
+        background: #dcfce7;
+        color: #166534;
+        padding: 3px 10px;
+        border-radius: 999px;
+        font-size: 0.8rem;
+        font-weight: 700;
+      }
+
+      .amb-actions {
+        display: flex;
+        gap: 12px;
+      }
+
+      .amb-btn-outline {
+        flex: 1;
+        padding: 13px;
+        border-radius: 12px;
+        border: 1.5px solid #cfdcd2;
+        background: #ffffff;
+        color: #1c2826;
+        font-weight: 600;
+        font-size: 0.93rem;
+        cursor: pointer;
+        text-decoration: none;
+        text-align: center;
+      }
+
+      .amb-btn-outline:hover {
+        background: #f1f7f2;
+      }
+
+      .amb-btn-home {
+        flex: 1;
+        padding: 13px;
+        border-radius: 12px;
+        background: #1b5e20;
+        color: #ffffff;
+        font-weight: 600;
+        font-size: 0.93rem;
+        text-decoration: none;
+        text-align: center;
+      }
+    </style>
   </head>
   <body>
     <!-- Header Navbar -->
@@ -32,228 +294,67 @@
     </header>
 
     <div class="container">
-      <!-- Card Formulir Pemesanan Ambulance Mandiri -->
-      <div
-        style="
-          max-width: 600px;
-          margin: 40px auto;
-          background-color: #ffffff;
-          border: 1px solid #e0eae0;
-          border-radius: 16px;
-          padding: 35px;
-          box-shadow: 0 8px 24px rgba(30, 125, 50, 0.08);
-          text-align: left;
-        "
-      >
-        <h2
-          style="
-            color: #1b5e20;
-            margin-top: 0;
-            margin-bottom: 8px;
-            font-size: 1.6rem;
-            text-align: center;
-          "
-        >
-          Formulir Pemesanan Ambulans
-        </h2>
-        <p
-          style="
-            color: #666;
-            font-size: 0.9rem;
-            margin-bottom: 30px;
-            text-align: center;
-          "
-        >
-          Armada ambulans siaga melayani 24 jam
-        </p>
+      <!-- Card Formulir Pemesanan Ambulance -->
+      <div class="amb-card">
+        <div id="ambError" class="amb-error"></div>
 
-        <form id="formAmbulance">
-          <div style="margin-bottom: 20px">
-            <label
-              style="
-                display: block;
-                margin-bottom: 8px;
-                font-weight: 600;
-                color: #1c2826;
-                font-size: 0.95rem;
-              "
-              >Nama Pemesan:</label
-            >
-            <input
-              type="text"
-              id="nama_pemesan"
-              name="nama"
-              placeholder="Masukkan nama lengkap"
-              required
-              style="
-                width: 100%;
-                padding: 12px 14px;
-                border-radius: 10px;
-                border: 1px solid #ccc;
-                font-size: 0.95rem;
-                box-sizing: border-box;
-                outline: none;
-              "
-            />
+        <!-- TAMPILAN FORM -->
+        <div id="ambFormWrapper">
+          <div class="amb-header-box">
+            <span class="amb-badge"><span class="amb-dot"></span> Siaga 24 Jam</span>
+            <h2>Formulir Pemesanan Ambulans</h2>
+            <p>Armada ambulans jenazah siap menjemput dan mengantar ke lokasi tujuan</p>
           </div>
 
-          <div style="margin-bottom: 20px">
-            <label
-              style="
-                display: block;
-                margin-bottom: 8px;
-                font-weight: 600;
-                color: #1c2826;
-                font-size: 0.95rem;
-              "
-              >Nomor Telepon / WhatsApp:</label
-            >
-            <input
-              type="tel"
-              id="no_hp"
-              name="telepon"
-              placeholder="Contoh: 081234567890"
-              required
-              style="
-                width: 100%;
-                padding: 12px 14px;
-                border-radius: 10px;
-                border: 1px solid #ccc;
-                font-size: 0.95rem;
-                box-sizing: border-box;
-                outline: none;
-              "
-            />
-          </div>
+          <form id="formAmbulance">
+            <div class="amb-group">
+              <label class="amb-label" for="nama_pemesan">Nama Pemesan:</label>
+              <input
+                type="text"
+                id="nama_pemesan"
+                name="nama"
+                class="amb-input"
+                placeholder="Masukkan nama lengkap pemesan"
+                required
+              />
+            </div>
 
-          <div style="margin-bottom: 20px">
-            <label
-              style="
-                display: block;
-                margin-bottom: 8px;
-                font-weight: 600;
-                color: #1c2826;
-                font-size: 0.95rem;
-              "
-              >Lokasi Penjemputan:</label
-            >
-            <textarea
-              id="lokasi_penjemputan"
-              name="pickup"
-              rows="3"
-              placeholder="Alamat rumah duka / Rumah Sakit"
-              required
-              style="
-                width: 100%;
-                padding: 12px 14px;
-                border-radius: 10px;
-                border: 1px solid #ccc;
-                font-size: 0.95rem;
-                box-sizing: border-box;
-                font-family: inherit;
-                resize: vertical;
-                outline: none;
-              "
-            ></textarea>
-          </div>
+            <div class="amb-group">
+              <label class="amb-label" for="no_hp">Nomor Telepon / WhatsApp:</label>
+              <input
+                type="tel"
+                id="no_hp"
+                name="telepon"
+                class="amb-input"
+                placeholder="Contoh: 081234567890"
+                required
+              />
+            </div>
 
-          <div style="margin-bottom: 25px">
-            <label
-              style="
-                display: block;
-                margin-bottom: 8px;
-                font-weight: 600;
-                color: #1c2826;
-                font-size: 0.95rem;
-              "
-              >Lokasi Tujuan (TPU / Pemakaman):</label
-            >
-            <textarea
-              id="lokasi_tujuan"
-              name="destination"
-              rows="3"
-              placeholder="Alamat TPU atau lokasi pemakaman"
-              required
-              style="
-                width: 100%;
-                padding: 12px 14px;
-                border-radius: 10px;
-                border: 1px solid #ccc;
-                font-size: 0.95rem;
-                box-sizing: border-box;
-                font-family: inherit;
-                resize: vertical;
-                outline: none;
-              "
-            ></textarea>
-          </div>
+            <div class="amb-group">
+              <label class="amb-label" for="lokasi_penjemputan">Lokasi Penjemputan:</label>
+              <textarea
+                id="lokasi_penjemputan"
+                name="pickup"
+                rows="3"
+                class="amb-input"
+                placeholder="Alamat rumah duka / Rumah Sakit lengkap dengan patokan"
+                required
+              ></textarea>
+            </div>
 
-          <button
-            type="submit"
-            id="btnSubmit"
-            class="btn-primary"
-            style="padding: 14px; font-size: 1rem; width: 100%; cursor: pointer"
-          >
-            Pesan Ambulans Sekarang
-          </button>
-        </form>
-      </div>
-    </div>
-
-    <!-- Footer -->
-    <footer>
-      <p>
-        &copy; 2026 <strong>GoKematian Project</strong>. Layanan Duka Cita
-        Terpadu.
-      </p>
-    </footer>
-
-    <!-- Script Penanganan AJAX Form -->
-    <script>
-      document
-        .getElementById("formAmbulance")
-        .addEventListener("submit", async (e) => {
-          e.preventDefault();
-          const btn = document.getElementById("btnSubmit");
-          btn.disabled = true;
-          btn.innerText = "Memproses Pemesanan...";
-
-          const payload = {
-            nama_pemesan: document.getElementById("nama_pemesan").value,
-            no_hp: document.getElementById("no_hp").value,
-            lokasi_penjemputan:
-              document.getElementById("lokasi_penjemputan").value,
-            lokasi_tujuan: document.getElementById("lokasi_tujuan").value,
-          };
-
-          try {
-            // URL disesuaikan dengan rute Express /ambulance/order
-            const response = await fetch("/ambulance/order", {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify(payload),
-            });
-
-            const result = await response.json();
-
-            if (response.ok) {
-              alert(
-                "Pemesanan Ambulans Berhasil! Sistem sedang mencari driver terdekat.",
-              );
-              // Kosongkan form setelah berhasil
-              document.getElementById("formAmbulance").reset();
-            } else {
-              alert(
-                "Gagal Pemesanan: " + (result.message || "Terjadi kesalahan."),
-              );
-            }
-          } catch (err) {
-            alert("Terjadi kesalahan jaringan: " + err.message);
-          } finally {
-            btn.disabled = false;
-            btn.innerText = "Pesan Ambulans Sekarang";
-          }
-        });
-    </script>
-  </body>
-</html>
+            <div class="amb-group" style="margin-bottom: 26px">
+              <label class="amb-label" for="lokasi_tujuan">Lokasi Tujuan (TPU / Pemakaman):</label>
+              <textarea
+                id="lokasi_tujuan"
+                name="destination"
+                rows="3"
+                class="amb-input"
+                placeholder="Alamat TPU atau lokasi pemakaman tujuan"
+                required
+              ></textarea>
+              <div class="amb-chips">
+                <span class="amb-chip" onclick="isiTujuan('TPU Payung Sekaki, Pekanbaru')">TPU Payung Sekaki</span>
+                <span class="amb-chip" onclick="isiTujuan('TPU Tampan, Pekanbaru')">TPU Tampan</span>
+                <span class="amb-chip" onclick="isiTujuan('TPU Umban Sari, Pekanbaru')">TPU Umban Sari</span>
+                <span class="amb-chip" onclick="isi
